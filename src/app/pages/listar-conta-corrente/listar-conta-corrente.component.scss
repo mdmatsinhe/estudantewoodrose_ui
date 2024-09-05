@@ -1,0 +1,22 @@
+.filtro{
+    top: 0;
+    width: 100%;
+    margin: auto;
+    padding: 10px;
+    margin-top: 10px;
+    display:flex;
+    justify-content: center;
+   }
+
+   .container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 16px;
+    margin-bottom: 40px;
+   
+  }
+
+  .separador{
+    width: 10px;
+  }

@@ -1,0 +1,27 @@
+
+@import "primeicons/primeicons.css";
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+
+    .mdc-button.mat-orange {
+        color: #fff;  
+        background: #fd6127;
+    }
+    .mat-mdc-flat-button.mat-custom-color {
+        color: #e79016;   
+        background-color: #155724;
+    }
+    .mat-mdc-icon-button.mat-custom-color {
+        color: #17d1bf;   
+        background-color: #cc2445;
+    } 
+
+    .mat-mdc-flat-button.mat-orange{
+        background: #fd6127;
+        color: #fff;
+      } 
+
+      .setting_button:disabled {
+        background-color: red
+     }
+}

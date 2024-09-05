@@ -1,0 +1,97 @@
+<app-header [nomeUtilizador]="userlogado"></app-header>
+<div align="center" class="filtro">
+  <mat-form-field appearence="outline">
+    <mat-label>Ano Lectivo</mat-label>
+    <mat-select [(value)]="anoSeleccionado" >
+      <mat-option value="2024">2024</mat-option>
+      <mat-option value="2023">2023</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="separador"></div>
+  <mat-form-field appearence="fill">
+    <mat-label>Semestre</mat-label>
+    <mat-select [(value)]="semestreSeleccionado" (selectionChange)="listarNotas()">
+      <mat-option value="1">1</mat-option>
+      <mat-option value="2">2</mat-option>
+    </mat-select>
+  </mat-form-field>
+  </div>
+<div class="container">
+  
+  <p-card header="" *ngFor="let pauta of pautas" class="pauta-card">
+    <strong>{{pauta.disciplina}}</strong>
+    <p>
+      Teste 1 :  <mat-label *ngIf="pauta.publicadaTeste1">{{pauta.notaTeste1}}</mat-label>
+    </p>
+    <p>
+      Teste 2 :  <mat-label *ngIf="pauta.publicadaTeste2">{{pauta.notaTeste2}}</mat-label>
+    </p>
+    <p>
+      Teste 3 :  <mat-label *ngIf="pauta.publicadaTeste3">{{pauta.notaTeste3}}</mat-label>
+    </p>
+    <p>
+      Trabalho 1:  <mat-label *ngIf="pauta.publicadaTrabalho1">{{pauta.notaTrabalho1}}</mat-label>
+    </p>
+    <p>
+      Trabalho 2:  <mat-label *ngIf="pauta.publicadaTrabalho2">{{pauta.notaTrabalho2}}</mat-label>
+    </p>
+    <p>
+      Trabalho 3:  <mat-label *ngIf="pauta.publicadaTrabalho3">{{pauta.notaTrabalho3}}</mat-label>
+    </p>
+    <p>
+      Nota de Frequência : <mat-label *ngIf="pauta.publicadaFrequencia">{{pauta.notaFrequencia}}</mat-label>
+    </p>
+    <p>
+      Resultado de Frequência : <p-tag *ngIf="pauta.publicadaFrequencia" [value]="pauta.resultadoFrequencia"
+        [severity]="getSeverityFrequencia(pauta.resultadoFrequencia)"></p-tag>
+    </p>
+    <p>
+      Nota do Exame Normal : <mat-label *ngIf="pauta.publicadaExameNormal">{{pauta.notaExameNormal}}</mat-label>
+    </p>
+    <p>
+      Nota do Exame de Recorrência : <mat-label *ngIf="pauta.publicadaExameRecorrencia">{{pauta.notaExameRecorrencia}}</mat-label>
+    </p>
+    <p>
+      Nota do Final : <mat-label *ngIf="pauta.publicadaNotaFinal">{{pauta.notaFinal}}</mat-label>
+    </p>
+    <p>
+      Resultado Final : <p-tag *ngIf="pauta.publicadaNotaFinal" [value]="pauta.resultadoFinal" [severity]="getSeverityFinal(pauta.resultadoFinal)">
+      </p-tag>
+    </p>
+
+  </p-card>
+</div>
+
+
+<!--
+<p-table [value]="pautas" [tableStyle]="{'min-width': '50rem'}">
+  <ng-template pTemplate="header" let-columns>
+      <tr>
+          <th>Disciplina </th>
+          <th>Teste 1</th>
+          <th>Teste 2</th>
+          <th>Trabalho</th>
+          <th>Nota de Frequência</th>
+          <th>Resultado da Frequência</th>
+          <th>Exame Normal</th>
+          <th>Exame de Recorrência</th>
+          <th>Nota Final</th>
+          <th>Resultado Final</th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-pauta let-columns="columns">
+      <tr>
+          <td>{{pauta.disciplina}}</td>
+          <td>{{pauta.notaTeste1}}</td>
+          <td>{{pauta.notaTeste2}}</td>
+          <td>{{pauta.notaTrabalho}}</td>
+          <td>{{pauta.notaFrequencia}}</td>
+          <td><p-tag [value]="pauta.resultadoFrequencia" [severity]="getSeverityFrequencia(pauta.resultadoFrequencia)"></p-tag></td>
+          <td>{{pauta.notaExameNormal}}</td>
+          <td>{{pauta.notaExameRecorrencia}}</td>
+          <td>{{pauta.notaFinal}}</td>
+          <td><p-tag [value]="pauta.resultadoFinal" [severity]="getSeverityFinal(pauta.resultadoFinal)"></p-tag></td>
+      </tr>
+  </ng-template>
+</p-table>
+-->

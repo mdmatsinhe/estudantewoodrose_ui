@@ -1,0 +1,24 @@
+<app-header [nomeUtilizador]="userlogado"></app-header>
+    <div class="container">
+        <p-table [value]="pautas" [tableStyle]="{'min-width': '50rem'}">
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th>Ano</th>
+                    <th>Semestre</th>
+                    <th>Disciplina </th>
+                    <th>Nota Final</th>
+                    <th>Resultado Final</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-pauta let-columns="columns">
+                <tr>
+                    <td>{{pauta.anoLectivo}}</td>
+                    <td>{{pauta.semestre}}</td>
+                    <td>{{pauta.disciplina}}</td>
+                    <td>{{pauta.notaFinal}}</td> 
+                    <td>{{pauta.resultadoFinal}}</td> 
+                </tr>
+            </ng-template>
+          </p-table>
+        </div>
+

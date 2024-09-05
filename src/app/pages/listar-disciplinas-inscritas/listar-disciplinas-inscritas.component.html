@@ -1,0 +1,40 @@
+<app-header [nomeUtilizador]="userlogado"></app-header>
+<div align="center" class="filtro">
+    <mat-form-field appearence="outline">
+      <mat-label>Ano Lectivo</mat-label>
+      <mat-select [(value)]="anoSeleccionado" >
+        <mat-option value="2024">2024</mat-option>
+        <mat-option value="2023">2023</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="separador"></div>
+    <mat-form-field appearence="fill">
+      <mat-label>Semestre</mat-label>
+      <mat-select [(value)]="semestreSeleccionado" (selectionChange)="listarDisciplinas()">
+        <mat-option value="1">1</mat-option>
+        <mat-option value="2">2</mat-option>
+      </mat-select>
+    </mat-form-field>
+    </div>
+<div class="container">
+<p-table [value]="disciplinasInscritas" [tableStyle]="{'min-width': '50rem'}">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th>Disciplina </th>
+            <th>Ano</th>
+            <th>Semestre</th>
+            <th>Turma</th>
+            <th>Tipo de Inscrição</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-disciplina let-columns="columns">
+        <tr>
+            <td>{{disciplina.disciplina}}</td>
+            <td>{{disciplina.ano}}</td>
+            <td>{{disciplina.semestre}}</td>
+            <td>{{disciplina.turma}}</td> 
+            <td>{{disciplina.tipoInscricao}}</td> 
+        </tr>
+    </ng-template>
+  </p-table>
+</div>

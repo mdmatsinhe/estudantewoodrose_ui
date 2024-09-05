@@ -1,0 +1,35 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <button mat-icon-button [matMenuTriggerFor]="menu2">
+            <mat-icon>list</mat-icon> 
+        </button>
+        <mat-menu #menu2="matMenu"> 
+            <button mat-menu-item routerLink="/notas"> 
+                <mat-icon>info</mat-icon> 
+                <span>Listar Notas</span> 
+            </button> 
+            <button mat-menu-item routerLink="/disciplinas"> 
+                <mat-icon>info</mat-icon> 
+                <span>Disciplinas Inscritas</span> 
+            </button> 
+            <button mat-menu-item routerLink="/historico"> 
+                <mat-icon>info</mat-icon> 
+                <span>Histórico Académico</span> 
+            </button> 
+            <button mat-menu-item routerLink="/contacorrente"> 
+                <mat-icon>info</mat-icon> 
+                <span>Conta Corrente</span> 
+            </button> 
+            <button mat-menu-item routerLink="/login">
+                <mat-icon aria-hidden="false"
+                    aria-label="logout icon"
+                    fontIcon="logout"
+                    [ariaSetSize]="50"
+                    color="warn"></mat-icon> 
+                <span>Sair</span> 
+                   </button>
+        </mat-menu> 
+        <span class="spacer"></span>
+        <span sclass="">{{nomeUtilizador}}</span>
+    </mat-toolbar-row>
+</mat-toolbar>
