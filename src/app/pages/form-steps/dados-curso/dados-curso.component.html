@@ -1,0 +1,61 @@
+
+<form [formGroup]="dadosCursoForm">
+<div class="stepsdemo-content">
+    <p-card>
+        <ng-template pTemplate="title">
+            Dados do Curso
+        </ng-template>
+        <ng-template pTemplate="subtitle">
+            Preencha dados do curso pretendido
+        </ng-template>
+        <ng-template pTemplate="content">
+            <div class="p-fluid formgrid grid">
+               
+                <div class="field col-12 md:col-6">
+                    <label for="unidade">Unidade</label>
+                    <p-dropdown inputId="unidade" [options]=delegacoes   optionLabel="nome"  placeholder="Seleccione a unidade" (onChange)="onDelegacaoChange($event)" formControlName="delegacao"></p-dropdown>
+                    <small *ngIf="dadosCursoForm.get('delegacao')?.touched && dadosCursoForm.get('delegacao')?.invalid" class="p-error">
+                        A unidade é obrigatória.
+                      </small>
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="faculdade">Instituição</label>
+                    <p-dropdown inputId="faculdade" [options]=faculdades optionLabel="nome"   placeholder="Seleccione a instituição" (onChange)="onFaculdadeChange($event)" formControlName="faculdade"></p-dropdown>
+                    <small *ngIf="dadosCursoForm.get('faculdade')?.touched && dadosCursoForm.get('faculdade')?.invalid" class="p-error">
+                        A faculdde é obrigatório.
+                      </small>
+                </div>
+               
+                <div class="field col-12 ">
+                    <label for="curso">Curso/Classe</label>
+                    <p-dropdown inputId="curso" [options]=cursos optionLabel="nome"   placeholder="Seleccione o curso ou a classe pretendido(a)" formControlName="curso"></p-dropdown>
+                    <small *ngIf="dadosCursoForm.get('curso')?.touched && dadosCursoForm.get('curso')?.invalid" class="p-error">
+                        O curso é obrigatório.
+                      </small>
+                </div>
+
+                <div class="field col-12 md:col-6">
+                    <label for="turno">Turno</label>
+                    <p-dropdown inputId="turno"  [options]=turnos optionLabel="turno"placeholder="Seleccione o turno" formControlName="turno"></p-dropdown>
+                    <small *ngIf="dadosCursoForm.get('turno')?.touched && dadosCursoForm.get('turno')?.invalid" class="p-error">
+                        O turno é obrigatório.
+                      </small>
+                </div>
+               
+            </div>
+            
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <div class="grid grid-nogutter justify-content-between align-items-center">
+                <div class="col">
+                    <p-button label="Anterior" (onClick)="prevPage()" icon="pi pi-angle-left" styleClass="custom-button"></p-button>
+                </div>
+                <div class="col text-right">
+                    <p-button label="Próximo" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right" styleClass="custom-button"></p-button>
+                </div>
+            </div>
+        </ng-template>
+        <p-toast></p-toast>
+    </p-card>
+</div>
+</form>

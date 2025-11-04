@@ -1,44 +1,135 @@
 <app-header [nomeUtilizador]="userlogado"></app-header>
-<div align="center" class="filtro">
-    <mat-form-field appearence="outline">
-      <mat-label>Ano Lectivo</mat-label>
-      <mat-select [(value)]="anoSeleccionado" >
-        <mat-option value="2023">2024</mat-option>
-        <mat-option value="2022">2023</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <div class="separador"></div>
-    <mat-form-field appearence="fill">
-      <mat-label>Semestre</mat-label>
-      <mat-select [(value)]="semestreSeleccionado" (selectionChange)="listarDebitos()">
-        <mat-option value="1">1</mat-option>
-        <mat-option value="2">2</mat-option>
-      </mat-select>
-    </mat-form-field>
-    </div>
-<div class="container">
-<p-table [value]="contas" [tableStyle]="{'min-width': '50rem'}">
-    <ng-template pTemplate="header" let-columns>
-        <tr>
-            <th>Descrição </th>
-            <th>Entidade</th>
-            <th>Referência</th>
-            <th>Total a Pagar</th>
-            <th>Prazo de Pagamento</th>
-            <th>Crédito</th>
-            <th>Data de Pagamento</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-contacorrente let-columns="columns">
-        <tr>
-            <td>{{contacorrente.descricao}}</td>
-            <td>91111</td>
-            <td>{{contacorrente.referencia}}</td>
-            <td>{{contacorrente.totalDebito}}</td> 
-            <td>{{contacorrente.prazo}}</td>
-            <td>{{contacorrente.credito}}</td> 
-            <td>{{contacorrente.dataPagamento}}</td>  
-        </tr>
-    </ng-template>
-  </p-table>
+
+<!-- Filtros -->
+<div fxLayout="row wrap" fxLayoutAlign="center center" class="filtro" style="margin: 1rem 0;">
+  <mat-form-field  appearance="outline">
+    <mat-label>Ano Lectivo</mat-label>
+    <mat-select [(value)]="anoSeleccionado" (selectionChange)="listarDebitos()">
+      <mat-option value="2025">2025</mat-option>
+      <mat-option value="2024">2024</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="separador"></div>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Trimestre</mat-label>
+    <mat-select [(value)]="semestreSeleccionado" (selectionChange)="listarDebitos()">
+      <mat-option value="1">1</mat-option>
+      <mat-option value="2">2</mat-option>
+      <mat-option value="3">3</mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
+
+<!-- Tabela para telas grandes e cards para telas menores -->
+<div fxLayout="column" fxLayoutAlign="center center" class="container">
+  <!-- Tabela (somente para telas grandes) -->
+  <div fxHide fxShow.gt-sm>
+    <p-table [value]="contas" [tableStyle]="{'min-width': '50rem'}">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th>Descrição</th>
+          <th>Entidade</th>
+          <th>Referência</th>
+          <th>Total a Pagar</th>
+          <th>Prazo de Pagamento</th>
+          <th>Crédito</th>
+          <th>Data de Pagamento</th>
+          <th>Pago</th> <!-- Nova Coluna -->
+          <th>Recibo</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-contacorrente let-columns="columns">
+        <tr>
+          <td>{{ contacorrente.descricao }}</td>
+          <td>{{ contacorrente.entidade }}</td>
+          <td>{{ contacorrente.referencia }}</td>
+          <td>{{ formatarValor(contacorrente.totalDebito)}}</td>
+          <td>{{ contacorrente.prazo }}</td>
+          <td>{{ formatarValor(contacorrente.credito)}}</td>
+          <td>{{ contacorrente.dataPagamento }}</td>
+          <td>
+            <!-- Botão para indicar estado de pagamento -->
+            <button 
+            pButton 
+            type="button" 
+            [icon]="getButtonProperties(contacorrente).icon"
+            [ngClass]="getButtonProperties(contacorrente).class"
+            [title]="getButtonProperties(contacorrente).title"
+            class="p-button-rounded">
+          </button>
+                   
+          </td>
+          <td>
+            <!-- ✅ Botão de impressão visível apenas quando pago -->
+            <button 
+              pButton 
+              *ngIf="contacorrente.pago" 
+              icon="pi pi-print" 
+              class="p-button-rounded p-button-info"
+              (click)="imprimirRecibo(contacorrente)" 
+              title="Imprimir Recibo">
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <tr>
+          <td colspan="8" style="text-align: right;">
+            <p-button icon="pi pi-print" (click)="extrato()" label="Extrato Financeiro" styleClass="custom-button"></p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <!-- Cards (somente para telas pequenas) -->
+  <div fxHide fxShow.lt-md>
+    <div class="cards-container">
+      <mat-card *ngFor="let contacorrente of contas | paginate: { itemsPerPage: 8, currentPage: page }" class="conta-card">
+        <mat-card-title>{{ contacorrente.descricao }}</mat-card-title>
+        <mat-card-content>
+          <p><strong>Entidade:</strong> {{ contacorrente.entidade }}</p>
+          <p><strong>Referência:</strong> {{ contacorrente.referencia }}</p>
+          <p><strong>Total a Pagar:</strong> {{ formatarValor(contacorrente.totalDebito)}}</p>
+          <p><strong>Prazo de Pagamento:</strong> {{ contacorrente.prazo }}</p>
+          <p><strong>Crédito:</strong> {{ formatarValor(contacorrente.credito)}}</p>
+          <p><strong>Data de Pagamento:</strong> {{ contacorrente.dataPagamento }}</p>
+          <p>
+            <!-- Botão para indicar estado de pagamento -->
+            <button pButton type="button" icon="pi pi-check" 
+                    *ngIf="contacorrente.pago" class="p-button-rounded p-button-success" 
+                    title="Pago" ></button>
+            <button pButton type="button" icon="pi pi-exclamation-triangle" 
+                    *ngIf="!contacorrente.pago&&!isPrazoExpirado(contacorrente)" 
+                    class="p-button-rounded p-button-warning" title="Dentro do Prazo"  ></button>
+            <button pButton type="button" icon="pi pi-exclamation-triangle" 
+                    *ngIf="!contacorrente.pago&&isPrazoExpirado(contacorrente)" 
+                    class="p-button-rounded  p-button-danger" title="Fora do Prazo"  ></button>
+                    <button 
+                    pButton 
+                    *ngIf="contacorrente.pago" 
+                    icon="pi pi-print" 
+                    class="p-button-rounded p-button-info"
+                    (click)="imprimirRecibo(contacorrente)" 
+                    title="Imprimir Recibo">
+                  </button>
+          </p>
+          
+        </mat-card-content>
+      </mat-card>
+    </div>
+     <!-- Botão "Extrato" visível apenas em telas menores -->
+  <div fxLayout="row" fxLayoutAlign="center center" style="margin-top: 1rem;">
+    <p-button icon="pi pi-print" (click)="extrato()" label="Extrato Financeiro" styleClass="custom-button"></p-button>
+  </div>
+    <!-- Paginação -->
+    <mat-paginator [length]="contas.length" [pageSize]="8" (page)="page = $event.pageIndex + 1"></mat-paginator>
+  </div>
+</div>
+ 
+
+<!-- TOAST Component -->
+<p-toast></p-toast>

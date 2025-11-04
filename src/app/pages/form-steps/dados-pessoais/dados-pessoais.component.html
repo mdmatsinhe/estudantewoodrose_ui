@@ -1,0 +1,101 @@
+<form [formGroup]="dadosPessoaisForm">
+<div class="stepsdemo-content">
+    <p-card>
+        <ng-template pTemplate="title">
+            Dados Pessoais
+        </ng-template>
+        <ng-template pTemplate="subtitle">
+            Preencha seus dados pessoais
+        </ng-template>
+        <ng-template pTemplate="content">
+            <div class="p-fluid formgrid grid">
+                <div class="field col-12 md:col-6">
+                    <label for="nome">Nome</label>
+                    <input id="nome" type="text" pInputText formControlName="nome"> 
+                    <small *ngIf="dadosPessoaisForm.get('nome')?.touched && dadosPessoaisForm.get('nome')?.invalid" class="p-error">
+                        O nome é obrigatório.
+                      </small>
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="apelido">Apelido</label>
+                    <input id="apelido" type="text"  pInputText formControlName="apelido" > 
+                    <small *ngIf="dadosPessoaisForm.get('apelido')?.touched && dadosPessoaisForm.get('apelido')?.invalid" class="p-error">
+                        O apelido é obrigatório.
+                      </small>
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="dataNascimento">Data de Nascimento</label>
+                    <p-calendar id="dataNascimento" dateFormat="dd-mm-yy" formControlName="dataNascimento" placeholder="escreva a data no formato dd-MM-yyyy"></p-calendar>
+                    <small *ngIf="dadosPessoaisForm.get('dataNascimento')?.touched && dadosPessoaisForm.get('dataNascimento')?.invalid" class="p-error">
+                          <ng-container *ngIf="dadosPessoaisForm.get('dataNascimento')?.errors?.['dataFutura']">
+                            A data de nascimento não pode ser no futuro.
+                          </ng-container>
+                          <ng-container *ngIf="dadosPessoaisForm.get('dataNascimento')?.errors?.['required']">
+                            A data de nascimento é obrigatória.
+                          </ng-container>
+                      </small>
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="sexo">Sexo</label>
+                    <p-dropdown inputId="sexo" [options]=sexos  optionLabel="nome" placeholder="Seleccione o sexo" formControlName="sexo"></p-dropdown>
+                    <small *ngIf="dadosPessoaisForm.get('sexo')?.touched && dadosPessoaisForm.get('sexo')?.invalid" class="p-error">
+                        O sexo é obrigatório.
+                      </small>
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="telefone">Telefone Fixo</label>
+                    <input id="telefone" type="number"  pInputText formControlName="telefoneFixo" > 
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="telefone">Telemóvel</label>
+                    <input id="telefone" type="number"  pInputText formControlName="telefone" > 
+                    <small *ngIf="dadosPessoaisForm.get('telefone')?.touched && dadosPessoaisForm.get('telefone')?.invalid" class="p-error">
+                        O telefone é obrigatório e deve ter 9 dígitos.
+                      </small>
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="email">Email</label>
+                    <input id="email" type="text"  pInputText formControlName="email"> 
+                  
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="tipoDoc">Tipo de Documento de Identificação</label>
+                    <p-dropdown inputId="tipoDoc" [options]=tiposDocumentos optionLabel="nome" placeholder="Seleccione o tipo de documento de identificação" formControlName="tipoDoc"></p-dropdown>
+                    <small *ngIf="dadosPessoaisForm.get('tipoDoc')?.touched && dadosPessoaisForm.get('tipoDoc')?.invalid" class="p-error">
+                        O tipo de documento de identificação é obrigatório.
+                      </small>
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="numeroDoc">Número do Documento de Identificação</label>
+                    <input  id="numeroDoc" type="text" pInputText formControlName="numeroDoc"> 
+                    <small *ngIf="dadosPessoaisForm.get('numeroDoc')?.touched && dadosPessoaisForm.get('numeroDoc')?.invalid" class="p-error">
+                        O número do documento de identificação é obrigatório.
+                      </small>
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="nacionalidade">Nacionalidade</label>
+                    <p-dropdown inputId="nacionalidade" [options]=nacionalidades   optionLabel="nacionalidade"  placeholder="Seleccione a nacionalidade" formControlName="nacionalidade" (onChange)="onNacionalidadeChange($event)"></p-dropdown>
+                    <small *ngIf="dadosPessoaisForm.get('nacionalidade')?.touched && dadosPessoaisForm.get('nacionalidade')?.invalid" class="p-error">
+                        A nacionalidade é obrigatória.
+                      </small>
+                </div>
+                <div class="field col-12 md:col-6" *ngIf="mostrarProvincias">
+                    <label for="provincia">Província</label>
+                    <p-dropdown inputId="provincia" [options]=provincias optionLabel="nome"  placeholder="Seleccione a provincia" formControlName="provincia" (onChange)="onProvinciaChange($event)"></p-dropdown>
+                </div>
+                <div class="field col-12 md:col-6" *ngIf="mostrarProvincias">
+                    <label for="distrito">Distrito</label>
+                    <p-dropdown inputId="distrito" [options]=distritos optionLabel="nome"  placeholder="Seleccione o distrito" formControlName="distrito"></p-dropdown>
+                </div>
+            </div>
+            
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <div class="grid grid-nogutter justify-content-end">
+                <p-button label="Próximo" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right" styleClass="custom-button"></p-button>
+            </div>
+        </ng-template>
+        <p-toast></p-toast>
+    </p-card>
+</div>
+</form>

@@ -1,6 +1,8 @@
 export interface Pauta {
+    id:number;
     anoLectivo:number;
     semestre:number;
+    anoCurso:number;
     disciplina: string;
     notaTeste1: number;
     publicadaTeste1: boolean;

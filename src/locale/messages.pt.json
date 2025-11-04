@@ -1,0 +1,49 @@
+{
+  "display": {
+    "date": {
+      "short": {
+        "day": "numeric",
+        "month": "short",
+        "year": "2-digit"
+      },
+      "long": {
+        "day": "numeric",
+        "month": "long",
+        "year": "numeric"
+      }
+    },
+    "time": {
+      "short": {
+        "hour": "2-digit",
+        "minute": "2-digit"
+      },
+      "long": {
+        "hour": "2-digit",
+        "minute": "2-digit",
+        "second": "2-digit"
+      }
+    },
+    "number": {
+      "currency": {
+        "style": "currency",
+        "currency": "MZN",  // Adjust currency according to the project requirements
+        "minimumFractionDigits": 2,
+        "maximumFractionDigits": 2
+      }
+    }
+  },
+  "messages": {
+    "welcome": "Bem-vindo ao sistema!",
+    "error": {
+      "network": "Erro de rede. Tente novamente mais tarde.",
+      "notFound": "Página não encontrada.",
+      "accessDenied": "Acesso negado."
+    },
+    "buttons": {
+      "ok": "OK",
+      "cancel": "Cancelar",
+      "apply": "Aplicar"
+    }
+  }
+}
+

@@ -1,0 +1,14 @@
+.card p-card {
+    width: 800px; /* Define a largura do card */
+    max-width: 100%; /* Responsivo */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Estilo de sombra */
+    border-radius: 8px; /* Bordas arredondadas */
+}
+.mat-toolbar.mat-primary{
+    background: #461c06;
+    color: #fff;
+}
+
+.spacer {
+    flex: 1 1 auto;
+  }

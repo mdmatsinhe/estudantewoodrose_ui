@@ -1,0 +1,204 @@
+<app-header [nomeUtilizador]="userlogado"></app-header>
+<form [formGroup]="estudanteForm" (ngSubmit)="onSubmit()">
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px">
+    <!-- Container Principal -->
+    <div fxLayout="row" fxLayoutAlign="start start" fxLayout.lt-md="column" fxLayoutAlign.lt-md="center center"
+      fxLayoutGap="16px">
+      <!-- Dados Pessoais -->
+      <mat-card class="card-left">
+        <mat-card-title>Dados Pessoais</mat-card-title>
+        <mat-card-content>
+          <div fxLayout="column" fxLayoutGap="5px">
+            <!-- NUIT -->
+            <mat-form-field appearance="outline">
+              <mat-label>NUIT</mat-label>
+              <input matInput formControlName="nuit" />
+            </mat-form-field>
+
+            <!-- Nome -->
+            <mat-form-field appearance="outline">
+              <mat-label>Nome</mat-label>
+              <input matInput formControlName="nome" />
+            </mat-form-field>
+
+            <!-- Apelido -->
+            <mat-form-field appearance="outline">
+              <mat-label>Apelido</mat-label>
+              <input matInput formControlName="apelido" />
+            </mat-form-field>
+
+            <div fxLayout="row" fxLayoutGap="5px" fxLayout.lt-md="column" fxLayoutAlign.lt-md="center center">
+              <!-- Data de Nascimento -->
+              <mat-form-field class="responsive-field" appearance="outline" fxFlex="50%" fxFlex.lt-md="100%">
+                <mat-label>Data de Nascimento</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="dataNascimento" />
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <!-- Telefone -->
+              <mat-form-field class="responsive-field" appearance="outline" fxFlex="50%" fxFlex.lt-md="100%">
+                <mat-label>Telefone</mat-label>
+                <input matInput formControlName="telefone" />
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="5px" fxLayout.lt-md="column" fxLayoutAlign.lt-md="center center">
+              <!-- Sexo -->
+              <mat-form-field class="responsive-field" appearance="outline" fxFlex="50%" fxFlex.lt-md="100%">
+                <mat-label>Sexo</mat-label>
+                <mat-select formControlName="sexo">
+                  <mat-option *ngFor="let sexo of sexos" [value]="sexo.id">
+                    {{ sexo.nome }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <!-- Estado Civil -->
+              <mat-form-field class="responsive-field" appearance="outline" fxFlex="50%" fxFlex.lt-md="100%">
+                <mat-label>Estado Civil</mat-label>
+                <mat-select formControlName="estadoCivil">
+                  <mat-option *ngFor="let estado of estadosCivis" [value]="estado.id">
+                    {{ estado.estadoCivil }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <!-- Endereço -->
+            <mat-form-field appearance="outline">
+              <mat-label>Endereço</mat-label>
+              <input matInput formControlName="endereco" />
+            </mat-form-field>
+
+            <!-- Email -->
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" />
+            </mat-form-field>
+
+            <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayoutAlign="start center">
+              <!-- Nome do Pai (75%) -->
+              <mat-form-field class="responsive-field" appearance="outline" fxFlex="70%" fxFlex.lt-md="100%">
+                <mat-label>Nome do Pai</mat-label>
+                <input matInput formControlName="nomePai" />
+              </mat-form-field>
+            
+              <!-- Telefone do Pai (25%) -->
+              <mat-form-field class="responsive-field" appearance="outline" fxFlex="30%" fxFlex.lt-md="100%">
+                <mat-label>Telefone do Pai</mat-label>
+                <input matInput formControlName="telefonePai" />
+              </mat-form-field>
+            </div>
+           
+            <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayoutAlign="start center">
+              <!-- Nome do Pai (75%) -->
+              <mat-form-field class="responsive-field" appearance="outline" fxFlex="70%" fxFlex.lt-md="100%">
+                <mat-label>Nome da Mãe</mat-label>
+                <input matInput formControlName="nomeMae" />
+              </mat-form-field>
+            
+              <!-- Telefone do Pai (25%) -->
+              <mat-form-field class="responsive-field" appearance="outline" fxFlex="30%" fxFlex.lt-md="100%">
+                <mat-label>Telefone da Mãe</mat-label>
+                <input matInput formControlName="telefoneMae" />
+              </mat-form-field>
+            </div> 
+
+            <mat-form-field appearance="outline">
+              <mat-label>Nome do Responsável Financeiro</mat-label>
+              <input matInput formControlName="nomeResponsavelFinanceiro" />
+            </mat-form-field>
+            <div fxLayout="row" fxLayoutGap="5px" fxLayout.lt-md="column" fxLayoutAlign.lt-md="center center">
+              <!-- Sexo -->
+              <mat-form-field class="responsive-field" appearance="outline" fxFlex="50%" fxFlex.lt-md="100%">
+                <mat-label>Email do Responsável Financeiro</mat-label>
+               
+                  <input matInput formControlName="emailResponsavelFinanceiro" />
+      
+              </mat-form-field>
+
+              <!-- Estado Civil -->
+              <mat-form-field class="responsive-field" appearance="outline" fxFlex="50%" fxFlex.lt-md="100%">
+                <mat-label>Telefone do Responsável Financeiro</mat-label>
+                <input matInput formControlName="telefoneFixo" />
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <!-- Container dos Outros Cards -->
+      <div fxLayout="column" fxLayoutAlign="end start" fxFlex="auto" fxLayout.lt-md="column"
+        fxLayoutAlign.lt-md="center center">
+        <!-- Documento de Identificação -->
+        <mat-card class="card-right">
+          <mat-card-title>Documento de Identificação</mat-card-title>
+          <mat-card-content>
+            <div fxLayout="column" fxLayoutGap="5px">
+              <mat-form-field appearance="outline">
+                <mat-label>Tipo de Documento</mat-label>
+                <mat-select formControlName="tipoDocumentoIdentificacao">
+                  <mat-option *ngFor="let documentos of tiposDocumentos" [value]="documentos.id">
+                    {{ documentos.nome }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Número</mat-label>
+                <input matInput formControlName="numeroDocumentoIdentificacao" />
+              </mat-form-field>
+
+
+              <mat-form-field appearance="outline">
+                <mat-label>Validade</mat-label>
+                <input matInput [matDatepicker]="pickerValidade" formControlName="validadeDocumentoIdentificacao" />
+                <mat-datepicker-toggle matSuffix [for]="pickerValidade"></mat-datepicker-toggle>
+                <mat-datepicker #pickerValidade></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Nacionalidade -->
+        <mat-card class="card-right">
+          <mat-card-title>Nacionalidade</mat-card-title>
+          <mat-card-content>
+            <div fxLayout="column" fxLayoutGap="5px">
+              <!-- Nacionalidade -->
+              <mat-form-field appearance="outline" fxFlex="50">
+                <mat-label>Nacionalidade</mat-label>
+                <mat-select formControlName="nacionalidade">
+                  <mat-option *ngFor="let nacionalidade of nacionalidades" [value]="nacionalidade.id">
+                    {{ nacionalidade.nacionalidade }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <!-- Província -->
+              <mat-form-field appearance="outline" fxFlex="50">
+                <mat-label>Província</mat-label>
+                <mat-select formControlName="provincia" (selectionChange)="onProvinciaChange($event)">
+                  <mat-option *ngFor="let provincia of provincias" [value]="provincia.id">
+                    {{ provincia.nome }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <!-- Distrito -->
+              <mat-form-field appearance="outline" fxFlex="50">
+                <mat-label>Distrito</mat-label>
+                <mat-select formControlName="distrito">
+                  <mat-option *ngFor="let distrito of distritos" [value]="distrito.id">{{ distrito.nome }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  <!-- Botão de Atualizar -->
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <button mat-raised-button color="primary" type="submit">Atualizar</button>
+  </div>
+
+</form>

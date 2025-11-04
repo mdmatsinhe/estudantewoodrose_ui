@@ -1,4 +1,4 @@
-
+<p-toast position="center"></p-toast>
 <section class="login-component">
     <mat-card class="login">
 
@@ -7,10 +7,10 @@
                 <mat-card-title></mat-card-title>
             </mat-card-header>
             <div>
-                <img src="/assets/images/logo.png"/>
+                <img src="/assets/images/logo.png" width="130px" height="125px"/>
             </div>
             <p style="font: 12px/14px arial;
-            font-weight: bold; color: #fd6127; text-decoration: none;">SISTEMA INTEGRADO DE GESTÃO ACADÉMICA</p>
+            font-weight: bold; color: #461c06; text-decoration: none;">SISTEMA INTEGRADO DE GESTÃO ACADÉMICA</p>
             <form [formGroup]="loginForm">
                 <mat-card-content>
                     <mat-form-field class="full-width" appearance="outline">
@@ -25,7 +25,8 @@
                     </mat-form-field>
                 </mat-card-content>
                 <mat-card-actions>
-                    <button [disabled]="loginForm.invalid" mat-flat-button color="warn" (click)="login()">Login</button>
+                    <button [disabled]="loginForm.invalid" mat-flat-button class="custom-login-button" (click)="login()">ENTRAR</button>
+                    <button  mat-flat-button class="custom-login-button" (click)="candidatura()">Candidatura</button>
                 </mat-card-actions>
             </form>
         </div>

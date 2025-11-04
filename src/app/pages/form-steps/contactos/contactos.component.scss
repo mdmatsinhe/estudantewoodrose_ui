@@ -1,0 +1,84 @@
+.stepsdemo-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px; /* Ajuste para evitar que fique muito pequeno */
+    padding: 1rem;
+}
+
+.stepsdemo-content p-card {
+    width: 800px; /* Define a largura do card */
+    max-width: 100%; /* Responsivo */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Estilo de sombra */
+    border-radius: 8px; /* Bordas arredondadas */
+}
+
+.grid.justify-content-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.col {
+    display: flex;
+}
+
+.text-right {
+    justify-content: flex-end;
+}
+
+.field-checkbox {
+    display: flex;
+    align-items: center;
+  }
+  
+  .ml-2 {
+    margin-left: 0.5rem; /* Ajuste o espaçamento conforme necessário */
+  }
+
+  .p-checkbox {
+    display: inline-block !important;
+    visibility: visible !important;
+    position: relative !important;
+  }
+
+  .summary-form {
+    font-size: 0.875rem; /* Reduz o tamanho da fonte */
+    gap: 1rem;
+  }
+  
+  .summary-form .form-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .summary-label {
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+    display: block;
+  }
+  
+  .summary-value {
+    margin: 0;
+  }
+  
+  @media (max-width: 768px) {
+    .summary-form .grid > .col-6 {
+      flex: 1 1 100%; /* Em telas menores, cada campo ocupa uma linha */
+    }
+  }
+
+  .summary-form .field {
+    margin-bottom: 1rem; /* Reduz o espaçamento entre as seções */
+  }  
+
+  .spacing {
+    margin-top: 10px; /* Espaço entre as linhas */
+  }
+  :host ::ng-deep .ui-dialog {
+    width: 800px !important;
+  }

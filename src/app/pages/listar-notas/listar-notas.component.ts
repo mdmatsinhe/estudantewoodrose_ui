@@ -18,8 +18,8 @@ export class ListarNotasComponent implements OnInit {
 
   userlogado='';
 
-  anoSeleccionado='2024';
-  semestreSeleccionado='1';
+  anoSeleccionado='2025';
+  semestreSeleccionado='2';
 
   subjectId:any;
 
@@ -27,7 +27,7 @@ export class ListarNotasComponent implements OnInit {
   
   pautas : Pauta[]=[];
 
-  anos : number[]=[2022,2023];
+  anos : number[]=[2023,2024,2025];
 
   semestres : number[]=[1,2];
 

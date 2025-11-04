@@ -4,4 +4,7 @@ export interface Inscricao{
     semestre: number;
     turma: string;
     tipoInscricao: string;
+    idDisciplina: number;
+    idEstudante:number;
+    anoLectivo:number;
 }

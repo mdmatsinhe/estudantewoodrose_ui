@@ -64,8 +64,7 @@ ngOnInit(): void {
    console.log(this.user.password,this.loginForm.value.confirmPassword)
    this.authService.atualizarSenha(this.user.id!,this.user.password,this.user.loginCount,this.token).subscribe({
      next: (value)=>{
-      this.router.navigateByUrl("/notas");
-      console.log('senha atualizada com sucesso');
+      this.router.navigateByUrl("/disciplinas");
      },
      error: (err)=>{
        console.log(err);

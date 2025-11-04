@@ -1,0 +1,88 @@
+<app-header [nomeUtilizador]="userlogado"></app-header>
+
+
+<div fxLayout="row wrap" fxLayoutAlign="center center" class="container">
+  <h2>Gerar Referências de Exame de Recorrência</h2>
+</div>
+  <div fxLayout="row wrap" fxLayoutAlign="center center" class="container">
+  <!-- Ano Lectivo -->
+  <mat-form-field appearance="outline" style="margin-left: 10px;">
+    <mat-label>Ano Lectivo</mat-label>
+    <mat-select [(value)]="selectedAnoLectivo" (selectionChange)="listarPautas()">
+      <mat-option value="2024">2024</mat-option>
+      <mat-option value="2023">2023</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Semestre -->
+  <mat-form-field appearance="outline" style="margin-left: 10px;">
+    <mat-label>Semestre</mat-label>
+    <mat-select [(value)]="selectedSemestre" (selectionChange)="listarPautas()">
+      <mat-option value="1">1</mat-option>
+      <mat-option value="2">2</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Disciplina -->
+  <mat-form-field appearance="outline" style="width: 280px; margin-right: 10px;margin-left:10px">
+    <mat-label>Disciplina</mat-label>
+    <mat-select [(value)]="selectedDisciplina" (selectionChange)="onDisciplinaChange($event)">
+      <mat-option *ngFor="let pauta of pautas" [value]="pauta">{{ pauta.disciplina }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Botão Gerar Referência -->
+  <button mat-raised-button color="primary" style="margin-left:10px;  width: 200px;" (click)="gerarReferencia()" class="custom-button">
+    <mat-icon>description</mat-icon> Gerar Referência
+  </button>
+</div>
+
+  
+
+
+<!-- Card para telas pequenas -->
+<div fxLayout="column" fxLayoutAlign="center center" class="container">
+  <h3>Referências de Exame de Recorrência</h3>
+  <!-- Tabela para telas grandes -->
+  <div fxHide fxShow.gt-sm>
+    <p-table [value]="referencias" emptyMessage="Lista sem dados">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Descrição</th>
+          <th>Entidade</th>
+          <th>Referência</th>
+          <th>Valor</th>
+          <th>Prazo</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-referencia>
+        <tr>
+          <td>{{ referencia.tipoEmolumento }}</td>
+          <td>90001</td>
+          <td>{{ referencia.referencia }}</td>
+          <td>{{ formatarValor(referencia.totalDebito) }}</td>
+          <td>
+            {{ referencia.prazo }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+<div fxHide fxShow.lt-md>
+  <div class="cards-container">
+    <mat-card *ngFor="let referencia of referencias" class="conta-card">
+      <mat-card-title>{{ referencia.tipoEmolumento }}</mat-card-title>
+      <mat-card-content>
+        <p><strong>Entidade:</strong> 90001</p>
+        <p><strong>Referência:</strong> {{ referencia.referencia }}</p>
+        <p><strong>Total a Pagar:</strong> {{ formatarValor(referencia.totalDebito)}}</p>
+        <p><strong>Prazo de Pagamento:</strong> {{ referencia.prazo }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <!-- Paginação -->
+</div>
+
+
+<p-toast></p-toast>

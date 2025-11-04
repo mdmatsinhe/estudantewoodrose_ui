@@ -5,7 +5,7 @@
 }
 
 .color-button{
-  background-color: green; color: purple; border: 1px solid orange; 
+  background-color: green; color: purple; border: 1px solid #461c06; 
 } 
 .mat-success {
   background-color: green;
@@ -14,7 +14,19 @@
 
 
   .h2 { font: 12px/14px arial;
-    font-weight: bold; color: #fd6127; text-decoration: none; }
+    font-weight: bold; color:#461c06; text-decoration: none; }
+
+    .login-component {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* Ajusta a altura para preencher a tela inteira */
+  }
+  
+  .login {
+      width: 100%;
+      max-width: 400px; /* Ajuste a largura máxima conforme necessário */
+  }
 
 .login-component {
     max-width: 100%;
@@ -87,12 +99,12 @@
   }
 
   .button-color{
-    color:#fd6127;
+    color:#461c06;
     width: 300px;
   }
 
   .mat-toolbar.mat-primary{
-    background: #fd6127;
+    background: #461c06;
     color: #fff;
 }
 
@@ -119,3 +131,20 @@
   mat-form-field {
     display: block;
   }
+
+  .custom-login-button {
+    background-color: #461c06 !important;
+    color: white !important;
+    border: none !important;
+}
+
+.custom-login-button:hover {
+    background-color: #6a3e2f !important;
+}
+
+.custom-login-button:disabled {
+    background-color: #6a3e2f !important;
+    color: #ccc !important;
+}
+
+

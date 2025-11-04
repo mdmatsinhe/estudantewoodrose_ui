@@ -1,6 +1,9 @@
 
 @import "primeicons/primeicons.css";
-html, body { height: 100%; }
+html, body { width: 100%;
+    height: 100%;
+    overflow-x: hidden; /* Evita scroll horizontal indesejado */
+    position: relative; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
 
     .mdc-button.mat-orange {
@@ -24,4 +27,39 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
       .setting_button:disabled {
         background-color: red
      }
+     .custom-button {
+        background-color: #461c06 !important;
+        color: white !important; /* Ajusta a cor do texto para contraste */
+        border: none !important; /* Remove borda padrão */
+      }
+      .p-dialog {
+        width: 800px !important;
+      }
+
+      /* Ajusta o espaçamento entre os componentes */
+.p-fluid .p-field {
+  margin-bottom: 1rem; /* Espaçamento uniforme */
+}
+
+/* Define altura consistente para os inputs */
+.p-inputtext, .p-dropdown, .p-calendar, .p-button {
+  height: 2.5rem; /* Altura padrão do Atlantis */
+  font-size: 1rem; /* Tamanho da fonte */
+}
+
+/* Ajusta a tabela para seguir o padrão Atlantis */
+.p-datatable .p-datatable-tbody > tr > td {
+  padding: 1rem; /* Espaçamento entre células */
+}
+
+.p-datatable .p-datatable-header, .p-datatable .p-datatable-footer {
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+/* Alinha botões consistentemente */
+.p-button {
+  margin: 0.5rem; /* Espaçamento ao redor dos botões */
+}
+
 }

@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: "https://estudante.iscim.ac.mz:8443"
+  apiUrl: "https://aluno.woodroseschool.co.mz"
 };

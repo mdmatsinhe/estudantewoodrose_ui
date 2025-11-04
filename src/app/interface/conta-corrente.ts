@@ -1,4 +1,5 @@
 export interface ContaCorrente{
+    id?:number;
     descricao: string;
     entidade: string;
     referencia: string
@@ -7,4 +8,7 @@ export interface ContaCorrente{
     credito: number;
     dataPagamento: Date;
     pago: boolean;
+    situacao: string;
+    taxa_desconto:number;
+    recibo?:number;
 }

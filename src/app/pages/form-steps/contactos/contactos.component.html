@@ -1,0 +1,190 @@
+<form [formGroup]="dadosConfirmationForm">
+<div class="stepsdemo-content">
+  <p-card>
+    <ng-template pTemplate="title">
+      Confirmação
+    </ng-template>
+    <ng-template pTemplate="subtitle">
+      Revise seus dados antes de submeter a candidatura
+    </ng-template>
+    <ng-template pTemplate="content">
+      <div class="p-fluid formgrid grid summary-form">
+
+        <!-- Resumo dos Dados Pessoais -->
+        <div class="field col-12">
+          <h3 class="form-title">Dados Pessoais</h3>
+          <div class="grid">
+            <div class="col-6 md:col-4">
+              <label class="summary-label">Nome</label>
+              <p class="summary-value">{{ formDataService.getData('nome') }}</p>
+            </div>
+            <div class="col-6 md:col-3">
+              <label class="summary-label">Apelido</label>
+              <p class="summary-value">{{ formDataService.getData('apelido') }}</p>
+            </div>
+            <div class="col-6 md:col-3">
+              <label class="summary-label">Data de Nascimento</label>
+              <p class="summary-value">{{ formDataService.getData('dataNascimento')| date:'dd-MM-yyyy'  }}</p>
+            </div>
+            <div class="col-6 md:col-2">
+              <label class="summary-label">Sexo</label>
+              <p class="summary-value">{{ formDataService.getData('sexo')?.nome }}</p>
+            </div>
+          </div>
+          <div class="spacing"></div>
+          <div class="grid">
+            <div class="col-6 md:col-4">
+              <label class="summary-label">Nacionalide</label>
+              <p class="summary-value">{{ formDataService.getData('nacionalidade')?.nacionalidade }}</p>
+            </div>
+            <div class="col-6 md:col-3">
+              <label class="summary-label">Província</label>
+              <p class="summary-value">{{ formDataService.getData('provincia')?.nome }}</p>
+            </div>
+            <div class="col-6 md:col-3">
+              <label class="summary-label">Telemóvel</label>
+              <p class="summary-value">{{ formDataService.getData('telefone')  }}</p>
+            </div>
+            <div class="col-6 md:col-2">
+              <label class="summary-label">Telefone Fixo</label>
+              <p class="summary-value">{{ formDataService.getData('telefoneFixo')}}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resumo da Filiação -->
+        <div class="field col-12">
+          <h3 class="form-title">Filiação</h3>
+          <div class="grid">
+            <div class="col-6 md:col-4">
+              <label class="summary-label">Nome do Pai</label>
+              <p class="summary-value">{{ formDataService.getData('nomePai') }}</p>
+            </div>
+            <div class="col-6 md:col-4">
+              <label class="summary-label">Nome da Mãe</label>
+              <p class="summary-value">{{ formDataService.getData('nomeMae') }}</p>
+            </div>
+            <div class="col-6 md:col-4">
+              <label class="summary-label">Nome do(a) Encarregado(a)</label>
+              <p class="summary-value">{{ formDataService.getData('nomeEncarregado') }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resumo dos Dados do Curso -->
+        <div class="field col-12">
+          <h3 class="form-title">Dados do Curso</h3>
+          <div class="grid">
+            <div class="col-6 md:col-6">
+              <label class="summary-label">Unidade</label>
+              <p class="summary-value">{{ formDataService.getData('delegacao') ?.nome}}</p>
+            </div>
+            <div class="col-6 md:col-6">
+              <label class="summary-label">Instituição</label>
+              <p class="summary-value">{{ formDataService.getData('faculdade')?.nome }}</p>
+            </div>
+            <div class="col-6 md:col-6">
+              <label class="summary-label">Curso/Classe</label>
+              <p class="summary-value">{{ formDataService.getData('curso')?.nome }}</p>
+            </div>
+            <div class="col-6 md:col-6">
+              <label class="summary-label">Turno</label>
+              <p class="summary-value">{{ formDataService.getData('turno')?.turno }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Aceite dos Termos -->
+        <div class="field col-12">
+          <div class="flex align-items-center">
+            <p-checkbox
+              name="termos"
+              formControlName="termos"
+              [binary]="true"
+              inputId="termos">
+            </p-checkbox>
+            <label for="termos" class="ml-2">
+              Confirmo por esta via, tomar conhecimento de que a constituição de uma turma só é efetuada quando houver o número mínimo de 20 alunos/formandos matriculados.
+            </label>
+            <small *ngIf="dadosConfirmationForm.get('termos')?.touched && dadosConfirmationForm.get('termos')?.invalid" class="p-error">Deve aceitar os termos e condições.</small>
+    
+          </div>
+
+      
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <div class="grid grid-nogutter justify-content-between align-items-center">
+        <div class="col">
+          <p-button label="Anterior" (onClick)="prevPage()" icon="pi pi-angle-left" styleClass="custom-button"></p-button>
+        </div>
+        <div class="col text-right">
+          <p-button
+            label="Submeter Candidatura"
+            (onClick)="onSubmit()"
+            icon="pi pi-angle-right"
+            iconPos="right"
+            styleClass="p-button-success">
+          </p-button>
+        </div>
+      </div>
+    </ng-template>
+  </p-card>
+</div>
+<p-dialog header="Detalhes para Pagamento da Matrícula" [(visible)]="display" style="width: 800px;">
+  <p>Caro encarregado, a sua candidatura foi submetida com sucesso. Note que a matrícula será confirmada após o pagamento da taxa no prazo indicado na tabela abaixo. Use os dados abaixo para efectuar o pagamento da Matrícula usando os canáis bancários. Use o botão da impressora para imprimir o talão de pagamento.</p>
+  <div fxHide fxShow.gt-sm>
+    <p-table [value]="referencias" emptyMessage="Lista sem dados">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Descrição</th>
+          <th>Entidade</th>
+          <th>Referência</th>
+          <th>Valor</th>
+          <th>Prazo</th>
+          <th>Ações</th> <!-- Nova coluna para ações -->
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-referencia>
+        <tr>
+          <td>{{ referencia.tipoEmolumento }}</td>
+          <td>90001</td>
+          <td>{{ referencia.referencia }}</td>
+          <td>{{ formatarValor(referencia.totalDebito) }}</td>
+          <td>
+            {{ referencia.prazo | date:'dd-MM-yyyy' }}
+          </td>
+          <td>
+            <button pButton type="button" icon="pi pi-print" class="p-button-rounded p-button-text" (click)="baixarRelatorio()">
+            </button>
+          </td> <!-- Botão imprimir ao lado do prazo -->
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div fxHide fxShow.lt-md>
+    <div class="cards-container">
+      <mat-card *ngFor="let referencia of referencias" class="conta-card">
+        <mat-card-title>{{ referencia.tipoEmolumento }}</mat-card-title>
+        <mat-card-content>
+          <p><strong>Entidade:</strong> 90001</p>
+          <p><strong>Referência:</strong> {{ referencia.referencia }}</p>
+          <p><strong>Total a Pagar:</strong> {{ formatarValor(referencia.totalDebito)}}</p>
+          <p><strong>Prazo de Pagamento:</strong> {{ referencia.prazo | date:'dd-MM-yyyy'  }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="baixarRelatorio()">
+            <mat-icon>print</mat-icon>
+            Imprimir
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <!-- Paginação -->
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="irAoLogin()" label="Ok" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>
+</form>

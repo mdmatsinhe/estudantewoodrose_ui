@@ -1,0 +1,16 @@
+.stepsdemo-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px; /* Ajuste para evitar que fique muito pequeno */
+    padding: 1rem;
+}
+
+.stepsdemo-content p-card {
+    width: 800px; /* Define a largura do card */
+    max-width: 100%; /* Responsivo */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Estilo de sombra */
+    border-radius: 8px; /* Bordas arredondadas */
+}
+
+

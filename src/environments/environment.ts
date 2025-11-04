@@ -4,8 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://localhost:8083"
+   apiUrl: "http://localhost:8086"
   //apiUrl:"https://localhost:8443"
+  //apiUrl: "https://estudante.apolitecnica.ac.mz:8443"
 };
 
 /*

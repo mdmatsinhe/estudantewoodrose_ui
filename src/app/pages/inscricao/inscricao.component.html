@@ -1,0 +1,117 @@
+<app-header [nomeUtilizador]="userlogado"></app-header>
+<form [formGroup]="inscricaoForm">
+    <div class="form-container">
+      <!-- Dados do Estudante -->
+      <div class="section">
+        <h3>Dados do Aluno</h3>
+        <div class="p-fluid formgrid grid">
+          <div class="field col-12 md:col-3">
+            <label for="numero">Número</label>
+            <input id="numero" pInputText formControlName="numero" readonly />
+          </div>
+          <div class="field col-12 md:col-6">
+            <label for="nome">Nome</label>
+            <input id="nome" pInputText formControlName="nome" readonly />
+          </div>
+          <div class="field col-12 md:col-3">
+            <label for="apelido">Apelido</label>
+            <input id="apelido" pInputText formControlName="apelido" readonly />
+          </div>
+          <div class="field col-12 md:col-8">
+            <label for="curso">Classe</label>
+            <input id="curso" pInputText formControlName="curso" readonly />
+          </div>
+          <div class="field col-12 md:col-4">
+            <label for="curriculo">Currículo</label>
+            <input id="curriculo" pInputText formControlName="curriculo" readonly />
+          </div>
+        </div>
+      </div>
+  
+      <!-- Filtros -->
+      <div class="section">
+        <h3>Inscrição em Disciplinas</h3>
+        <div class="p-fluid formgrid grid">
+          <div class="field col-12 md:col-3">
+            <label for="anoLectivo">Ano Letivo</label>
+            <p-dropdown
+              id="anoLectivo"
+              [options]="anosLectivos"
+              formControlName="anoLectivo"
+              (onChange)="onAnoLectivoChange()">
+            </p-dropdown>
+          </div>
+          <div class="field col-12 md:col-3">
+            <label for="curso">Classe</label>
+            <p-dropdown
+              id="curso"
+              [options]="cursos"
+              optionLabel="nome" 
+              formControlName="curso"
+              (onChange)="onCursoChange()">
+            </p-dropdown>
+          </div>
+          <div class="field col-12 md:col-3">
+            <label for="turma">Turma</label>
+            <p-dropdown
+              id="turma"
+              [options]="turmas"
+              optionLabel="nome" 
+              formControlName="turma"
+              (onChange)="onTurmaChange($event)">
+            </p-dropdown>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Disciplinas -->
+      <div *ngIf="disciplinas.length > 0" class="section disciplinas-container">
+        <p-table [value]="disciplinas" selectionMode="multiple" [(selection)]="disciplinasSelecionadas">
+          <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 4rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+              <th>Disciplina</th>
+              
+              <th>Turma</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-disciplina>
+            <tr [pSelectableRow]="disciplina">
+                <td>
+                    <p-tableCheckbox [value]="disciplina"></p-tableCheckbox>
+                </td>
+              <td>{{ disciplina.nomeDisciplina }}</td>
+              <td>{{ disciplina.turma }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+  
+     
+      <div class="p-grid buttons-container">
+        <div class="p-col-auto">
+          <button pButton label="Inscrever Estudante" icon="pi pi-check" class="p-button-success" (click)="registrarInscricao()" ></button>
+        </div>
+        <div class="p-col-auto">
+          <button pButton label="Cancelar" icon="pi pi-times" class="p-button-secondary"></button>
+        </div>
+        <div class="p-col-auto">
+          <button pButton icon="pi pi-print" (click)="imprimir()" label="Boletim de Inscrição" styleClass="custom-button"></button>
+        </div>
+      </div>
+    </div>
+    <p-toast></p-toast>
+
+    <p-dialog header="Inscrição Semestral" [(visible)]="display" style="width: 800px;">
+      <p>Caro Estudante, a sua inscrição para o {{semestreSeleccionado}}° semestre do ano lectivo {{anoLectivoSelecionado}} foi submetida com sucesso. Use o botão abaixo para imprimir o boletim de inscrição.</p>
+      
+
+      <ng-template pTemplate="footer">
+        <p-button icon="pi pi-print" (click)="fechar()" label="Boletim de Inscrição" styleClass="custom-button"></p-button>
+      </ng-template>
+    </p-dialog>
+
+  </form>
+  

@@ -28,4 +28,18 @@ export class PautaService {
     return this.http.post<Pauta[]>(`${this.apiUrl}/api/pauta/historico`,{idEstudante},{headers});
   }
 
+  listarDisciplinasReprovadas(idEstudante: number, anoLectivo: number, semestre: number, token: string): Observable<Pauta[]> {
+    const headers = new HttpHeaders({
+      'Authorization' : `Bearer ${token}`
+    })
+    return this.http.post<Pauta[]>(`${this.apiUrl}/api/pauta/disciplinas-recorrencia`, {idEstudante,anoLectivo,semestre},{headers});
+  }
+
+  listarNotasDisciplina(idEstudante: number, idDisciplina: number,anoLectivo: number, semestre: number,token: string): Observable<Pauta[]> {
+    const headers = new HttpHeaders({
+      'Authorization' : `Bearer ${token}`
+    })
+    return this.http.post<Pauta[]>(`${this.apiUrl}/api/pauta/notas-disciplina`, {idEstudante,idDisciplina,anoLectivo,semestre},{headers});
+  }
+
 }

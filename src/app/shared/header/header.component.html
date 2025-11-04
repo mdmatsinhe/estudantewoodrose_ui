@@ -1,35 +1,70 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <button mat-icon-button [matMenuTriggerFor]="menu2">
-            <mat-icon>list</mat-icon> 
+      <!-- Menu Trigger Button -->
+      <button mat-icon-button [matMenuTriggerFor]="menu2">
+        <mat-icon>menu</mat-icon> 
+      </button>
+  
+      <!-- Menu Items -->
+      <mat-menu #menu2="matMenu"> 
+        
+        <!-- Disciplinas Inscritas -->
+        <button mat-menu-item routerLink="/disciplinas"> 
+          <mat-icon>assignment</mat-icon> <!-- Ícone relacionado a educação -->
+          <span>Disciplinas Inscritas</span> 
+        </button> 
+        
+        <!-- Histórico Académico -->
+        <button *ngIf="mostrarHistorico" mat-menu-item (click)="irHistorico()"
+        matTooltip="Indisponível devido a dívidas pendentes" visible="false"> 
+          <mat-icon>history_edu</mat-icon> <!-- Ícone de histórico acadêmico -->
+          <span>Histórico Académico</span> 
+        </button> 
+
+        <!-- Inscrição -->
+      <button mat-menu-item [matMenuTriggerFor]="menuInscricao" >
+        <mat-icon>edit_calendar</mat-icon> <!-- Ícone de inscrição -->
+        <span>Inscrição</span>
+      </button>
+
+      <!-- Submenu de Inscrição -->
+      <mat-menu #menuInscricao="matMenu">
+        <!-- Semestral -->
+        <button mat-menu-item (click)="irInscricao()"> 
+          <mat-icon>calendar_today</mat-icon> <!-- Ícone de calendário -->
+          <span>Anual</span>
         </button>
-        <mat-menu #menu2="matMenu"> 
-            <button mat-menu-item routerLink="/notas"> 
-                <mat-icon>info</mat-icon> 
-                <span>Listar Notas</span> 
-            </button> 
-            <button mat-menu-item routerLink="/disciplinas"> 
-                <mat-icon>info</mat-icon> 
-                <span>Disciplinas Inscritas</span> 
-            </button> 
-            <button mat-menu-item routerLink="/historico"> 
-                <mat-icon>info</mat-icon> 
-                <span>Histórico Académico</span> 
-            </button> 
-            <button mat-menu-item routerLink="/contacorrente"> 
-                <mat-icon>info</mat-icon> 
-                <span>Conta Corrente</span> 
-            </button> 
-            <button mat-menu-item routerLink="/login">
-                <mat-icon aria-hidden="false"
-                    aria-label="logout icon"
-                    fontIcon="logout"
-                    [ariaSetSize]="50"
-                    color="warn"></mat-icon> 
-                <span>Sair</span> 
-                   </button>
-        </mat-menu> 
-        <span class="spacer"></span>
-        <span sclass="">{{nomeUtilizador}}</span>
+
+        <!-- Exame de Recorrência -->
+        <button *ngIf="mostrarExameRecorrencia" mat-menu-item routerLink="/inscricao/exame-recorrencia" visible="false"> 
+          <mat-icon>event_repeat</mat-icon> <!-- Ícone de repetição -->
+          <span>Exame de Recorrência</span>
+        </button>
+      </mat-menu>
+
+        
+        <!-- Conta Corrente -->
+        <button mat-menu-item routerLink="/contacorrente"> 
+          <mat-icon>account_balance_wallet</mat-icon> <!-- Ícone de carteira ou finanças -->
+          <span>Plano de Pagamento</span> 
+        </button> 
+
+        <button mat-menu-item routerLink="/atualizar/dados"> 
+            <mat-icon>update</mat-icon> <!-- Ícone de carteira ou finanças -->
+            <span>Atualizar Dados</span> 
+          </button> 
+          
+        
+        <!-- Sair -->
+        <button mat-menu-item routerLink="/login">
+          <mat-icon>logout</mat-icon> <!-- Ícone de logout -->
+          <span>Sair</span> 
+        </button>
+      </mat-menu> 
+      
+      <!-- Spacer and User Name -->
+      <span class="spacer"></span>
+      <span>{{nomeUtilizador}}</span>
     </mat-toolbar-row>
-</mat-toolbar>
+  </mat-toolbar>
+  <p-toast position="center"></p-toast>

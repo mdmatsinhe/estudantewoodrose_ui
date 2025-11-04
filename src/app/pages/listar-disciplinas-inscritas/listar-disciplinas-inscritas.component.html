@@ -1,40 +1,111 @@
 <app-header [nomeUtilizador]="userlogado"></app-header>
-<div align="center" class="filtro">
-    <mat-form-field appearence="outline">
-      <mat-label>Ano Lectivo</mat-label>
-      <mat-select [(value)]="anoSeleccionado" >
-        <mat-option value="2024">2024</mat-option>
-        <mat-option value="2023">2023</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <div class="separador"></div>
-    <mat-form-field appearence="fill">
-      <mat-label>Semestre</mat-label>
-      <mat-select [(value)]="semestreSeleccionado" (selectionChange)="listarDisciplinas()">
-        <mat-option value="1">1</mat-option>
-        <mat-option value="2">2</mat-option>
-      </mat-select>
-    </mat-form-field>
-    </div>
-<div class="container">
-<p-table [value]="disciplinasInscritas" [tableStyle]="{'min-width': '50rem'}">
-    <ng-template pTemplate="header" let-columns>
-        <tr>
-            <th>Disciplina </th>
-            <th>Ano</th>
-            <th>Semestre</th>
-            <th>Turma</th>
-            <th>Tipo de Inscrição</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-disciplina let-columns="columns">
-        <tr>
-            <td>{{disciplina.disciplina}}</td>
-            <td>{{disciplina.ano}}</td>
-            <td>{{disciplina.semestre}}</td>
-            <td>{{disciplina.turma}}</td> 
-            <td>{{disciplina.tipoInscricao}}</td> 
-        </tr>
-    </ng-template>
-  </p-table>
+
+<!-- Filtros -->
+<div fxLayout="row wrap" fxLayoutAlign="center center" class="filtro" style="margin: 1rem 0;">
+  <mat-form-field  appearance="outline">
+    <mat-label>Ano Lectivo</mat-label>
+    <mat-select [(value)]="anoSeleccionado" (selectionChange)="listarDisciplinas()">
+      <mat-option value="2025">2025</mat-option>
+      <mat-option value="2024">2024</mat-option>
+      <mat-option value="2023">2023</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="separador"></div>
+  <mat-form-field  appearance="outline">
+    <mat-label>Trimestre</mat-label>
+    <mat-select [(value)]="semestreSeleccionado" (selectionChange)="listarDisciplinas()">
+      <mat-option value="1">1</mat-option>
+      <mat-option value="2">2</mat-option>
+      <mat-option value="3">3</mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
+
+<!-- Tabela para telas grandes e cards para telas menores -->
+<div fxLayout="column" fxLayoutAlign="center center" class="container">
+  <!-- Tabela (somente para telas maiores) -->
+  <div class="tabela" fxHide fxShow.gt-sm>
+    <ng-container *ngIf="disciplinasInscritas && disciplinasInscritas.length > 0">
+    <p-table [value]="disciplinasInscritas" [tableStyle]="{'min-width': '50rem'}">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th>Disciplina</th>
+          <th>Turma</th>
+          <th>Ações</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-disciplina let-columns="columns">
+        <tr>
+          <td>{{ disciplina.disciplina }}</td>
+          <td>{{ disciplina.turma }}</td>
+          <td>
+            <button pButton type="button" icon="pi pi-eye" label="Ver Notas" size="small" class="custom-button"
+                    (click)="abrirPopupNotas(disciplina)"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    </ng-container>
+  </div>
+
+  <!-- Cards (somente para telas pequenas) -->
+  <div class="cards-container" fxHide fxShow.lt-md>
+    <mat-card *ngFor="let disciplina of disciplinasInscritas" class="disciplina-card">
+      <mat-card-title>{{ disciplina.disciplina }}</mat-card-title>
+      <mat-card-content>
+        <p><strong>Turma:</strong> {{ disciplina.turma }}</p>
+        <p> <button pButton type="button" icon="pi pi-eye" label="Ver Notas" size="small" class="custom-button"
+          (click)="abrirPopupNotas(disciplina)"></button></p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<!-- Popup com Card de Notas -->
+<p-dialog header="Notas da Disciplina" [(visible)]="mostrarPopupNotas" [modal]="true" [closable]="true" [style]="{width: '350px'}">
+  <div *ngIf="notasDisciplina.length > 0">
+   
+    <strong>{{ notasDisciplina[0].disciplina }}</strong>
+    <p>
+      Teste 1 :  <mat-label *ngIf="notasDisciplina[0].publicadaTeste1">{{notasDisciplina[0].notaTeste1}}</mat-label>
+    </p>
+    <p>
+      Teste 2 :  <mat-label *ngIf="notasDisciplina[0].publicadaTeste2">{{notasDisciplina[0].notaTeste2}}</mat-label>
+    </p>
+    <p>
+      Teste 3 :  <mat-label *ngIf="notasDisciplina[0].publicadaTeste3">{{notasDisciplina[0].notaTeste3}}</mat-label>
+    </p>
+    <p>
+      Trabalho 1:  <mat-label *ngIf="notasDisciplina[0].publicadaTrabalho1">{{notasDisciplina[0].notaTrabalho1}}</mat-label>
+    </p>
+    <p>
+      Trabalho 2:  <mat-label *ngIf="notasDisciplina[0].publicadaTrabalho2">{{notasDisciplina[0].notaTrabalho2}}</mat-label>
+    </p>
+    <p>
+      Trabalho 3:  <mat-label *ngIf="notasDisciplina[0].publicadaTrabalho3">{{notasDisciplina[0].notaTrabalho3}}</mat-label>
+    </p>
+    <p>
+      Nota de Frequência : <mat-label *ngIf="notasDisciplina[0].publicadaFrequencia">{{notasDisciplina[0].notaFrequencia}}</mat-label>
+    </p>
+    <p>
+      Resultado de Frequência : <p-tag *ngIf="notasDisciplina[0].publicadaFrequencia" [value]="notasDisciplina[0].resultadoFrequencia"
+        [severity]="getSeverityFrequencia(notasDisciplina[0].resultadoFrequencia)"></p-tag>
+    </p>
+    <p>
+      Nota do Exame Normal : <mat-label *ngIf="notasDisciplina[0].publicadaExameNormal">{{notasDisciplina[0].notaExameNormal}}</mat-label>
+    </p>
+    <p>
+      Nota do Exame de Recorrência : <mat-label *ngIf="notasDisciplina[0].publicadaExameRecorrencia">{{notasDisciplina[0].notaExameRecorrencia}}</mat-label>
+    </p>
+    <p>
+      Nota do Final : <mat-label *ngIf="notasDisciplina[0].publicadaNotaFinal">{{notasDisciplina[0].notaFinal}}</mat-label>
+    </p>
+    <p>
+      Resultado Final : <p-tag *ngIf="notasDisciplina[0].publicadaNotaFinal" [value]="notasDisciplina[0].resultadoFinal" [severity]="getSeverityFinal(notasDisciplina[0].resultadoFinal)">
+      </p-tag>
+    </p>
+  </div>
+</p-dialog>
+
+<p-toast position="center"></p-toast>
+

@@ -1,11 +1,13 @@
 <app-header [nomeUtilizador]="userlogado"></app-header>
-    <div class="container">
-        <p-table [value]="pautas" [tableStyle]="{'min-width': '50rem'}">
+<div class="container">
+    <ng-container *ngIf="isDesktop$ | async; else mobileView">
+        <p-table [value]="pautas" [tableStyle]="{'min-width': '50rem'}" [paginator]="true" [rows]="8">
             <ng-template pTemplate="header" let-columns>
                 <tr>
+                    <th>Ano Lectivo</th>
                     <th>Ano</th>
                     <th>Semestre</th>
-                    <th>Disciplina </th>
+                    <th>Disciplina</th>
                     <th>Nota Final</th>
                     <th>Resultado Final</th>
                 </tr>
@@ -13,12 +15,30 @@
             <ng-template pTemplate="body" let-pauta let-columns="columns">
                 <tr>
                     <td>{{pauta.anoLectivo}}</td>
+                    <td>{{pauta.anoCurso}}</td>
                     <td>{{pauta.semestre}}</td>
                     <td>{{pauta.disciplina}}</td>
                     <td>{{pauta.notaFinal}}</td> 
                     <td>{{pauta.resultadoFinal}}</td> 
                 </tr>
             </ng-template>
-          </p-table>
-        </div>
+        </p-table>
+    </ng-container>
 
+    <ng-template #mobileView>
+        <div class="card-container">
+            <mat-card *ngFor="let pauta of pautas">
+                <mat-card-header>
+                    <mat-card-title>{{pauta.disciplina}}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p><strong>Ano:</strong> {{pauta.anoLectivo}}</p>
+                    <p><strong>Semestre:</strong> {{pauta.semestre}}</p>
+                    <p><strong>Nota Final:</strong> {{pauta.notaFinal}}</p>
+                    <p><strong>Resultado Final:</strong> {{pauta.resultadoFinal}}</p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <mat-paginator [pageSize]="8"></mat-paginator>
+    </ng-template>
+</div>

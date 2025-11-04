@@ -1,0 +1,96 @@
+.form-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .section {
+    margin-bottom: 20px;
+  }
+  
+  h3 {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  /* Campos */
+  .p-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  /* Tabela */
+  .p-table {
+    margin-top: 15px;
+  }
+  
+  /* Botões */
+  .buttons .p-button-success {
+    background-color: #28a745;
+    border-color: #28a745;
+  }
+  
+  .buttons .p-button-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+  }
+  
+  .buttons-container {
+    display: flex; /* Coloca os elementos na mesma linha */
+    justify-content: flex-start; /* Alinha os botões à esquerda */
+    gap: 10px; /* Adiciona espaçamento entre os botões */
+  }
+  
+  .buttons-container .p-button {
+    margin: 0; /* Remove margens extras */
+  }
+  /* Alinhar botão com os campos */
+.align-items {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .align-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Fixar altura da lista com 6 linhas */
+  .p-table-wrapper {
+    max-height: calc(6 * 48px); /* Cada linha tem aproximadamente 48px */
+    overflow-y: auto;
+  }
+
+  .disciplinas-container .p-table-wrapper {
+    max-height: calc(6 * 48px); /* Cada linha tem aproximadamente 48px */
+    overflow-y: auto; /* Ativa a rolagem vertical */
+    border: 1px solid #ccc; /* Opcional: Adiciona borda ao contêiner */
+  }
+  
+  .disciplinas-container .p-table {
+    height: 100%; /* Garante que a tabela preencha a altura do contêiner */
+  }
+  
+  /* Alinhamento e ajuste de margens */
+  .p-table-wrapper {
+    margin-top: 15px; /* Espaçamento entre a tabela e os elementos acima */
+  }
+  
+  ::ng-deep p-table td:nth-child(6) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .custom-button {
+    background-color: #461c06 !important;
+    color: white !important; /* Ajusta a cor do texto para contraste */
+    border: none !important; /* Remove borda padrão */
+  }

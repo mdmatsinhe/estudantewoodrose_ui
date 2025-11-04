@@ -1,0 +1,38 @@
+
+# ── Node / Angular comuns ─────────────────────
+node_modules/
+dist/
+tmp/
+out-tsc/
+coverage/
+package-lock.json      # opcional: normalmente é bom versionar!
+yarn.lock              # idem: normalmente é bom versionar!
+
+# Angular (CLI)
+.angular/cache/
+.angular/local/
+.angular/*.log
+
+# Build/temporários
+*.log
+*.pid
+*.seed
+*.tmp
+*.swp
+*.swo
+
+# Ambiente/segredos (ajuste conforme usa)
+src/environments/*.local.ts
+src/environments/*.dev.ts
+src/environments/*.staging.ts
+# (mantenha apenas os templates, ex.: environment.ts.example)
+
+# IDEs/editors
+.vscode/
+.idea/
+*.iml
+
+# SO
+.DS_Store
+Thumbs.db
+

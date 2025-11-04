@@ -1,0 +1,77 @@
+<form [formGroup]="filiacaoForm">
+    <div class="stepsdemo-content">
+      <p-card>
+        <ng-template pTemplate="title">Filiação</ng-template>
+        <ng-template pTemplate="subtitle">
+          Preencha dados dos seus Pais ou Encarregado de Educação
+        </ng-template>
+        <ng-template pTemplate="content">
+          <div class="p-fluid formgrid grid">
+            <!-- Dados do Pai -->
+            <div class="field col-12 md:col-8">
+              <label for="nomePai">Nome do Pai</label>
+              <input id="nomePai" type="text" pInputText formControlName="nomePai" />
+              <small *ngIf="filiacaoForm.get('nomePai')?.touched && filiacaoForm.get('nomePai')?.invalid" class="p-error">
+                O nome do pai é obrigatório.
+              </small>
+            </div>
+            <div class="field col-12 md:col-4">
+              <label for="telefonePai">Telefone do Pai</label>
+              <input id="telefonePai" type="number" pInputText formControlName="telefonePai" />
+              <small *ngIf="filiacaoForm.get('telefonePai')?.touched && filiacaoForm.get('telefonePai')?.invalid" class="p-error">
+                O telefone do pai é obrigatório.
+              </small>
+            </div>
+  
+            <!-- Dados da Mãe -->
+            <div class="field col-12 md:col-8">
+              <label for="nomeMae">Nome da Mãe</label>
+              <input id="nomeMae" type="text" pInputText formControlName="nomeMae" />
+              <small *ngIf="filiacaoForm.get('nomeMae')?.touched && filiacaoForm.get('nomeMae')?.invalid" class="p-error">
+                O nome da mãe é obrigatório.
+              </small>
+            </div>
+            <div class="field col-12 md:col-4">
+              <label for="telefoneMae">Telefone da Mãe</label>
+              <input id="telefoneMae" type="number" pInputText formControlName="telefoneMae" />
+              <small *ngIf="filiacaoForm.get('telefoneMae')?.touched && filiacaoForm.get('telefoneMae')?.invalid" class="p-error">
+                O telefone da mãe é obrigatório.
+              </small>
+            </div>
+  
+            <!-- Encarregado de Educação -->
+            <div class="field col-12 md:col-6">
+              <label for="tipoEncarregado">Encarregado de Educação</label>
+              <p-dropdown 
+                id="tipoEncarregado" 
+                formControlName="tipoEncarregado"
+                [options]="responsavelOptions"
+                placeholder="Selecione">
+              </p-dropdown>
+            </div>
+            <div class="field col-12 md:col-8" *ngIf="filiacaoForm.get('tipoEncarregado')?.value === 'Outro'">
+              <label for="nomeEncarregado">Nome do Encarregado</label>
+              <input id="nomeEncarregado" type="text" pInputText formControlName="nomeEncarregado" />
+            </div>
+            <div class="field col-12 md:col-4" *ngIf="filiacaoForm.get('tipoEncarregado')?.value === 'Outro'">
+              <label for="telefoneEncarregado">Telefone do Encarregado</label>
+              <input id="telefoneEncarregado" type="number" pInputText formControlName="telefoneEncarregado" />
+            </div>
+          </div>
+        </ng-template>
+  
+        <ng-template pTemplate="footer">
+          <div class="grid grid-nogutter justify-content-between align-items-center">
+            <div class="col">
+              <p-button label="Anterior" (onClick)="prevPage()" icon="pi pi-angle-left" styleClass="custom-button"></p-button>
+            </div>
+            <div class="col text-right">
+              <p-button label="Próximo" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right" styleClass="custom-button"></p-button>
+            </div>
+          </div>
+        </ng-template>
+        <p-toast></p-toast>
+      </p-card>
+    </div>
+  </form>
+  
